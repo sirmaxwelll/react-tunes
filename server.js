@@ -3,10 +3,10 @@ var express = require('express'),
 
 var app = express();
 
-// use the public path for static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', (process.env.PORT || 5000));
 
-// start server
-app.listen(3000, function() {
-  console.log('Listening on port 3000...');
+app.use(express.static(__dirname + '/public'));
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
