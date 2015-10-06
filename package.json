@@ -1,0 +1,16 @@
+{
+  "name": "React-Test",
+  "version": "1.0.0",
+  "description": "Simple React app to test competancies",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brad Bumbalough",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "path": "^0.12.7",
+    "react": "^0.13.3"
+  }
+}

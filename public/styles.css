@@ -1,0 +1,127 @@
+#backgroundImage {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center center;
+	-webkit-filter: blur(70px);
+	-moz-filter: blur(70px);
+	-o-filter: blur(70px);
+	-ms-filter: blur(70px);
+	filter: blur(70px);
+	z-index: 0;
+}
+
+#container {
+	width: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+	#container #contentWrap {
+		background-color: rgba(255, 255, 255, 0.8);
+		width: calc(90% - 40px);
+		max-width: 980px;
+		padding: 20px;
+		margin: 0 auto;
+	}
+	
+.artist {
+	width: 100%;
+	margin-top: 20px;
+}
+
+	.artist img {
+		float: left;
+		margin-right: 16px;
+		max-height: 100px;
+		width: auto;
+	}
+	
+.albums {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+	.albums div {
+		position: relative;
+		float: left;
+		width: 33.3%;
+	}
+		
+		.albums div .title {
+			position: absolute;
+			display: none;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			width: 100%;
+			background-color: rgba(0, 0, 0, 0.8)
+		}
+		
+			.albums div .title h3 {
+				position: relative;
+				padding: 10px 0;
+				padding-top: 40%;
+				width: auto;
+				margin: 0 auto;
+				text-align: center;
+				color: #fff;
+				text-decoration: none;
+			}
+		
+		.albums div:hover .title {
+			display: block;
+		}
+	
+		.albums div img {
+			width: 100%;
+			height: auto;
+		}
+	
+	.albums div:nth-child(3n-1) {
+		clear: left;
+	}
+
+#results {
+	display: none;
+}
+
+input[type=text] {
+	border: none;
+	background-color: #f8f8f8;
+	color: #a9a9a9;
+	padding: 7px 10px;
+	font-size: 25px;
+	width: 100%;
+}
+
+	input:focus {
+		background-color: #ffffff;
+		color: #000000;
+	}
+	
+#loadmore {
+	margin-top: 20px;
+	width: 100%;
+}
+	
+	#loadmore button {
+		background-color: #f8f8f8;
+		color: #a9a9a9;
+		padding: 7px 10px;
+		font-size: 25px;
+		border: none;
+		width: 100%;
+	}
+
+.clear {
+	clear: both;
+}
