@@ -16,27 +16,10 @@ var Spotify = React.createClass({
 			offset: 0,
 			searchValue: nextProps.searchValue
 		},function(){
-
+			
 			if (this.state.searchValue != '') {
-				// build the url string
-				var albums_url = "https://api.spotify.com/v1/search?limit=21&offset=0&type=album,artist&q=artist:" + encodeURIComponent(this.state.searchValue);
-				// make the api call
-				var self = this;
-	
-				$.ajax(albums_url).done(function(res){
-	
-					self.setState({
-						albums: res.albums.items,
-						artist: res.artists.items[0],
-						count: res.albums.total,
-						image: res.artists.items[0].images[0].url,
-						search: 1
-					});
-	
-				});
-	
+				this.callSpotify();
 			} else {
-	
 				this.setState({
 					albums: [],
 					artist: [],
@@ -49,28 +32,45 @@ var Spotify = React.createClass({
 		});
 		
 	},
-	onLoadMore: function() {
-
-		var newOffset = this.state.offset + 21;
-
+	callSpotify: function() {
+			
 		// build the url string
-		var albums_url = "https://api.spotify.com/v1/search?limit=" + this.state.limit + "&offset=" + newOffset + "&type=album,artist&q=artist:" + encodeURIComponent(this.state.searchValue);
-		// make the api call
+		var albums_url = "https://api.spotify.com/v1/search?limit=" + this.state.limit + "&offset=" + this.state.offset + "&type=album,artist&q=artist:" + encodeURIComponent(this.state.searchValue);
 
-		var albumsArray = this.state.albums;
 		var self = this;
-
+		
+		// make the api call
 		$.ajax(albums_url).done(function(res){
+			
+			var albumsArray = self.state.albums;
+			
+			if(self.state.offset === 0) {
 
-			var newAlbumArray = albumsArray.concat(res.albums.items);
+				var newOffset = self.state.offset + 21;
+				
+				self.setState({
+					albums: res.albums.items,
+					artist: res.artists.items[0],
+					count: res.albums.total,
+					image: res.artists.items[0].images[0].url,
+					offset: newOffset,
+					search: 1
+				});
+				
+			} else {
+				
+				var newAlbumArray = albumsArray.concat(res.albums.items);
+				var newOffset = self.state.offset + 21;
 
-			self.setState({
-				albums: newAlbumArray,
-				offset: newOffset
-			});
+				self.setState({
+					albums: newAlbumArray,
+					offset: newOffset
+				});
+				
+			}
 
 		});
-
+			
 	},
 	render: function() {
 		return (
@@ -80,7 +80,7 @@ var Spotify = React.createClass({
 						<ResultCount count={this.state.count}/>
 						<ResultArtist artist={this.state.artist}/>
 						<ResultAlbums albums={this.state.albums}/>
-						<LoadMore onLoadMore={this.onLoadMore}/>
+						<LoadMore onLoadMore={this.callSpotify}/>
 					</div>
 				)}
 			</div>
